@@ -1,10 +1,14 @@
 # SEATMAP APP
 
-- This project written in Typescript
+- Project được viết bằng Typescript
+- Sử dụng thư viện ReactJS
 - Backend project:https://github.com/neil-go-phan/seatmap-backend
 
 ## HOW TO RUN
-Clone source code from repository. Then run
+- Clone source code từ repository. 
+- Mở terminal
+- CD vào folder project
+- Chạy các lệnh sau:
 
 ### `npm install`
 ### `npm start`
