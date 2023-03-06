@@ -1,6 +1,6 @@
 # SEATMAP APP
 
-- This project was writed by Typescript
+- This project written in Typescript
 - Backend project:https://github.com/neil-go-phan/seatmap-backend
 
 ## HOW TO RUN
