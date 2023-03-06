@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import md5 from "md5";
 import axios from "axios";
+import cryptoJS from 'crypto-js';
 import { _VAR } from "src/constants/variable";
 import {
   Title,
@@ -73,14 +73,18 @@ const SignUp: React.FC<Props> = (props: Props) => {
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<SignUpFormProperty> = async (data) => {
-    let { username, password, full_name } = data;
-    password = md5(password);
+    let { username, password, password_confirmation, full_name } = data;
+    password = cryptoJS.SHA512(password).toString()
+    if (password_confirmation) {
+      password_confirmation = cryptoJS.SHA512(password_confirmation).toString()
+    }
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}auth/sign-up`,
         {
           username,
           password,
+          password_confirmation,
           full_name,
         }
       );
@@ -89,6 +93,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
       } else {
         // router.push('/sign-up-success');
         setErrorMessage({ trigger: false, message: res.data.message });
+        props.handleSignUpClose()
       }
     } catch (error: any) {
       setErrorMessage({
@@ -96,7 +101,6 @@ const SignUp: React.FC<Props> = (props: Props) => {
         message: error.response.data.message,
       });
     }
-    props.handleSignUpClose()
   };
   return (
     <Modal>
@@ -116,7 +120,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
             <ErrorMessage>{errors.full_name.message}</ErrorMessage>
           )}
         </InputCluster>
-
+          
         <InputCluster>
           <Info> Username </Info>
           <Input
@@ -129,7 +133,7 @@ const SignUp: React.FC<Props> = (props: Props) => {
             <ErrorMessage>{errors.username.message}</ErrorMessage>
           )}
         </InputCluster>
-
+          
         <InputCluster>
           <Info> Password </Info>
           <Input
@@ -159,7 +163,6 @@ const SignUp: React.FC<Props> = (props: Props) => {
         {errorMessage.trigger && (
           <ErrorMessageFromSever>{errorMessage.message}</ErrorMessageFromSever>
         )}
-        <ErrorMessageFromSever>{errorMessage.message}</ErrorMessageFromSever>
         <SubmitBtn type="submit">Sign up</SubmitBtn>
       </form>
     </Modal>

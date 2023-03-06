@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import md5 from "md5";
 import axios from "axios";
+import Cookies from 'js-cookie'
+import cryptoJS from 'crypto-js';
 import { _VAR } from "src/constants/variable";
 import {
   Title,
@@ -61,16 +62,19 @@ const SignIn: React.FC<Props> = (props: Props) => {
   });
   const onSubmit: SubmitHandler<SignInFormProperty> = async (data) => {
     let { username, password } = data;
-    password = md5(password);
+    password = cryptoJS.SHA512(password).toString()
     try {
       const res = await axios.post(`${process.env.REACT_APP_BASE_URL}auth/sign-in`, {
         username,
         password,
       });
+      Cookies.set('access_token', res.data.accessToken);
+      Cookies.set('refresh_token', res.data.refreshToken);
       setErrorMessage({
         trigger: false,
         message: res.data.message,
       });
+      props.handleSignInClose()
     } catch (error: any) {
       setErrorMessage({
         trigger: true,
@@ -78,7 +82,7 @@ const SignIn: React.FC<Props> = (props: Props) => {
       });
     }
     reset({ password: "" });
-    props.handleSignInClose()
+    
   };
   return (
     <Modal >
@@ -113,7 +117,6 @@ const SignIn: React.FC<Props> = (props: Props) => {
         {errorMessage.trigger && (
           <ErrorMessageFromSever>{errorMessage.message}</ErrorMessageFromSever>
         )}
-          <ErrorMessageFromSever>{errorMessage.message}</ErrorMessageFromSever>
         <SubmitBtn type="submit">Sign in</SubmitBtn>
 
       </form>
