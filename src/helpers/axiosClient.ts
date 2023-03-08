@@ -1,6 +1,7 @@
 import axios from 'axios'
-import {_ROUTES} from 'src/constants/appRoutes'
+// import {_ROUTES} from 'src/constants/appRoutes'
 import Cookies from 'js-cookie'
+import { _ROUTES } from 'src/constants/appRoutes';
 // const unProtectedRoutes = [
 //   _ROUTES.SIGN_IN_PAGE,
 //   _ROUTES.SIGN_UP_PAGE,
@@ -53,8 +54,9 @@ axiosClient.interceptors.response.use(
     }
     Cookies.remove('refresh_token');
     Cookies.remove('access_token');
+    // TODO: Redirect to home page 
     // if (!unProtectedRoutes.includes(window.location.pathname)) {
-    //   window.location.href = '/sign-in';
+      window.location.href = _ROUTES.LADING_PAGE;
     // }
     return error;
   }
@@ -65,7 +67,7 @@ const newToken = async () => {
   if (token) {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/auth/token`,
+        `${process.env.REACT_APP_BASE_URL}auth/token`,
         {
           headers: {
             'x-refresh-token': token,

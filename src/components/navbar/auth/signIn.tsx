@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,6 +6,7 @@ import axios from "axios";
 import Cookies from 'js-cookie'
 import cryptoJS from 'crypto-js';
 import { _VAR } from "src/constants/variable";
+import { useNavigate } from 'react-router-dom'
 import {
   Title,
   Info,
@@ -16,7 +17,9 @@ import {
   ErrorMessage,
   SubmitBtn,
   ErrorMessageFromSever,
-} from "src/components/auth/style";
+} from "src/components/navbar/auth/style";
+import { _ROUTES } from "src/constants/appRoutes";
+import { IsLoggedContext } from "src/helpers/isLoggedContext";
 
 interface SignInFormProperty {
   username: string;
@@ -28,6 +31,8 @@ interface Props {
 }
 
 const SignIn: React.FC<Props> = (props: Props) => {
+  const logged = useContext(IsLoggedContext)
+  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState({
     trigger: false,
     message: "",
@@ -75,6 +80,8 @@ const SignIn: React.FC<Props> = (props: Props) => {
         message: res.data.message,
       });
       props.handleSignInClose()
+      logged?.setIsLogged(true)
+      navigate(_ROUTES.HOME_PAGE)
     } catch (error: any) {
       setErrorMessage({
         trigger: true,

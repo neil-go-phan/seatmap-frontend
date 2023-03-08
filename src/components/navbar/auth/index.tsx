@@ -18,18 +18,18 @@ const Auth: React.FC = () => {
   };
   return (
     <AuthContainer>
-      <div>
+      <>
         <AuthBtn onClick={() => setIsSignInOpen(!isSignInOpen)}> Sign in</AuthBtn>
         <Popup modal open={isSignInOpen} onClose={handleSignInClose}>
           <SignIn handleSignInClose={handleSignInClose} />
         </Popup>
-      </div>
-      <div>
+      </>
+      <>
         <AuthBtn onClick={() => setIsSignUpOpen(!isSignUpOpen)}> Sign Up</AuthBtn>
         <Popup modal open={isSignUpOpen} onClose={handleSignUpClose}>
           <SignUp handleSignUpClose={handleSignUpClose} />
         </Popup>
-      </div>
+      </>
     </AuthContainer>
   );
 };

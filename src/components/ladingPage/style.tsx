@@ -10,7 +10,7 @@ export const CarouselImg = styled.div`
   background-position: center;
   height: 100vh;
   background-attachment: fixed;
-  border-radius: 5px;
+  margin-top:-10px
 `;
 
 export const IntroductionParagraph = styled.div`

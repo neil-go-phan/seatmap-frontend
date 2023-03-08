@@ -1,19 +1,10 @@
-import React from "react";
-import { CarouselImg, IntroductionParagraph, IntroductionContent } from "./style";
+import React from 'react'
 
 const Home: React.FC = () => {
+  
   return (
-    <>
-    <CarouselImg>
-      <IntroductionParagraph>
-        <IntroductionContent>Manage your office seat easier with seatmap</IntroductionContent>
-      </IntroductionParagraph>
-    
+    <div>Home</div>
+  )
+}
 
-    </CarouselImg>
-    
-    </>
-  );
-};
-
-export default Home;
+export default Home

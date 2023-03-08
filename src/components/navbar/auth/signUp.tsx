@@ -15,7 +15,7 @@ import {
   ErrorMessage,
   SubmitBtn,
   ErrorMessageFromSever,
-} from "src/components/auth/style";
+} from "src/components/navbar/auth/style";
 
 interface SignUpFormProperty {
   full_name: string;
