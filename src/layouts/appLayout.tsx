@@ -7,7 +7,6 @@ import { checkAuth } from "src/helpers/checkAuth";
 import { useNavigate } from "react-router-dom";
 import { _ROUTES } from "src/constants/appRoutes";
 
-
 interface Props {
   children: React.ReactNode;
 }
@@ -25,6 +24,7 @@ const AppLayout: React.FC<Props> = (Props: Props) => {
     }
 
     checkLogIn();
+    // eslint-disable-next-line
   }, [isLogged]);
 
   return (

@@ -5,11 +5,10 @@ import { DeleteUser, EditUser, UserItem } from "./style";
 interface Props {
   user: IUser;
   index: number;
+  handleDeleteUser: (username: string, index:number) => Promise<void>
 }
-const Users: React.FC<Props> = ({ user, index }: Props) => {
-  const handleDelete = () => {
+const Users: React.FC<Props> = ({ user, index, handleDeleteUser }: Props) => {
 
-  }
   const handleEdit = () => {
 
   }
@@ -21,7 +20,7 @@ const Users: React.FC<Props> = ({ user, index }: Props) => {
       <UserItem>{user.Role}</UserItem>
       <UserItem>
         <EditUser onClick={handleEdit}>Edit</EditUser>
-        <DeleteUser onClick={handleDelete}>Delete</DeleteUser>
+        <DeleteUser onClick={()=>handleDeleteUser(user.Username, index)}>Delete</DeleteUser>
       </UserItem>
     </tr>
   );

@@ -6,7 +6,7 @@ import {
   HeaderItem,
 } from "src/components/userList/style";
 import User from "./user";
-
+import Swal from "sweetalert2";
 
 export interface IUser {
   Username: string;
@@ -21,16 +21,46 @@ const UserList: React.FC = () => {
       let userList: Array<IUser> = [];
       try {
         const { data } = await axiosClient.get(`/auth/users`);
-        // parse json to users
-        data.forEach((user: IUser) => userList.push(user));
+        data.forEach((user: IUser) => {
+          if (user.Role !== "Admin") {
+            userList.push(user);
+          }
+        });
         setUsers(userList);
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        Swal.fire({
+          title: "Error",
+          text: "You do not have permission",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
       }
     };
     getUserList();
   }, []);
-  console.log(users);
+
+  const handleDeleteUser = async (username: string, index: number) => {
+    try {
+      const { data } = await axiosClient.delete(
+        `/auth/delete-user/${username}`
+      );
+      setUsers(users.filter((user) => user.Username !== username));
+      Swal.fire({
+        title: "Success",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    } catch (error: any) {
+      Swal.fire({
+        title: "Error",
+        text: "Error when trying to detele user",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
   if (users.length !== 0) {
     return (
       <UserListContainer>
@@ -46,7 +76,13 @@ const UserList: React.FC = () => {
           </thead>
           <tbody>
             {users.map((user: IUser, index: number) => {
-              return <User user={user} index={index} />;
+              return (
+                <User
+                  user={user}
+                  index={index}
+                  handleDeleteUser={handleDeleteUser}
+                />
+              );
             })}
           </tbody>
         </TableUser>
