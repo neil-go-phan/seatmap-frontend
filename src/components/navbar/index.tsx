@@ -42,7 +42,13 @@ const tabs: Tab[] = [
   },
   {
     tabURL: _ROUTES.USER_LIST_PAGE,
-    tabTitle: "User list",
+    tabTitle: "User management",
+    role: "admin",
+    content: <UserList />,
+  },
+  {
+    tabURL: _ROUTES.USER_LIST_PAGE,
+    tabTitle: "Seatmap management",
     role: "admin",
     content: <UserList />,
   },
