@@ -3,7 +3,8 @@ import AppLayout from "src/layouts/appLayout";
 import { _ROUTES } from "src/constants/appRoutes";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "src/components/home";
-import UserList from "src/components/userList";
+import UserList from "src/components/manageUser";
+import CreateSeatmap from "./components/manageSeatmap";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
           <Route path={_ROUTES.LADING_PAGE} element={<LadingPage />} />
           <Route path={_ROUTES.HOME_PAGE} element={<Home />} />
           <Route path={_ROUTES.USER_LIST_PAGE} element={<UserList />} />
+          <Route path={_ROUTES.CREATE_SEATMAP_PAGE} element={<CreateSeatmap />} />
           {/* <Route path={urlResource.LINK_TO_LOGIN_PAGE} element={<Login handleLogin={handleLogin} />} /> */}
           {/* <Route path='*' element={<NotFoundPage />} /> */}
         </Routes>

@@ -60,7 +60,7 @@ export const ErrorMessageFromSever = styled(ErrorMessage)`
 `;
 
 export const SubmitBtn = styled.button`
-  background-color: #184b29;
+  background-color: #FFB100;
   line-height: 1.42;
   text-decoration: none;
   text-align: center;
@@ -70,7 +70,7 @@ export const SubmitBtn = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: #ffffff;
+  color: #1A0000;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 0.3rem 1rem;
@@ -84,13 +84,13 @@ export const SubmitBtn = styled.button`
   overflow: hidden;
   transition: .5s ease;
   &:hover{
-    background-image: linear-gradient(90deg,transparent,hsla(0,0%,100%,.25),transparent);
+    background-image: linear-gradient(90deg,transparent,hsla(0,0%,100%,.5),transparent);
 `;
 
 export const AuthBtn = styled.button`
   display: inline-block;
   margin: 0 0.5rem;
-  background-color: #184b29;
+  background-color: #FFB100;
   line-height: 1.42;
   text-decoration: none;
   text-align: center;
@@ -100,7 +100,7 @@ export const AuthBtn = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: #ffffff;
+  color: #1A0000;
   font-weight: 600;
   font-size: 1.2rem;
   padding: 0.3rem 1rem;

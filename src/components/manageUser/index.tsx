@@ -4,7 +4,8 @@ import {
   UserListContainer,
   TableUser,
   HeaderItem,
-} from "src/components/userList/style";
+  ManageUserTitle,
+} from "src/components/manageUser/style";
 import User from "./user";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
@@ -86,6 +87,7 @@ const UserList: React.FC = () => {
   if (users.length !== 0) {
     return (
       <UserListContainer>
+        <ManageUserTitle><h1>Manage users</h1></ManageUserTitle>
         <TableUser>
           <thead>
             <tr>

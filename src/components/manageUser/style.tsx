@@ -2,6 +2,19 @@ import styled from "styled-components";
 
 export const UserListContainer = styled.div``;
 
+export const ManageUserTitle= styled.div`
+  width: 100%;
+  min-height: 10vh;
+  display: table;
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+  display: table-cell;
+  }
+`;
+
 export const TableUser = styled.table`
   border-collapse: collapse;
   width: 80%;

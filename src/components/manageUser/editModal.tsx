@@ -34,7 +34,7 @@ interface Props {
   defaultRole: string;
   username: string;
   handleEditModelClose: () => void;
-  handleEditUser: (username: string, full_name:string, role: string) => void;
+  handleEditUser: (username: string, full_name: string, role: string) => void;
 }
 
 const EditModal: React.FC<Props> = (props: Props) => {
@@ -43,7 +43,6 @@ const EditModal: React.FC<Props> = (props: Props) => {
     message: "",
   });
   const [roles, setRoles] = useState<Array<Role>>([]);
-
   useEffect(() => {
     const getRoles = async () => {
       let roleArray: Array<Role> = [];
@@ -88,18 +87,19 @@ const EditModal: React.FC<Props> = (props: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<EditFormProperty>({
+    // cant not set default role, and a bug show up when select a invalid role 
     defaultValues: schema.cast({
       full_name: props.fullName,
-      role: props.defaultRole,
+      role: "CEO"
     }),
     resolver: yupResolver(schema),
   });
 
   const onSubmit: SubmitHandler<EditFormProperty> = async (data) => {
     let { full_name, role } = data;
-    const username = props.username
+    const username = props.username;
     try {
-      const { data } = await axiosClient.put(`user/update?role=${role}`, {
+      const { data } = await axiosClient.put(`auth/update`, {
         full_name,
         role,
         username,
@@ -108,7 +108,7 @@ const EditModal: React.FC<Props> = (props: Props) => {
         trigger: false,
         message: data.message,
       });
-      props.handleEditUser(props.username, full_name, role)
+      props.handleEditUser(props.username, full_name, role);
       props.handleEditModelClose();
     } catch (error: any) {
       setErrorMessage({
@@ -150,12 +150,16 @@ const EditModal: React.FC<Props> = (props: Props) => {
 
           <InputCluster>
             <Info> Role </Info>
-            <RoleSelect {...register("role")} required>
+            <RoleSelect
+              {...register("role")}
+              required
+              defaultValue={props.defaultRole}
+              
+            >
               {roles.map((role: Role) => {
                 return (
                   <RoleOption
                     key={`role_${role.ID}_${makeid(10)}`}
-                    onClick={() => console.log(role.RoleName)}
                     value={role.RoleName}
                   >
                     {role.RoleName}

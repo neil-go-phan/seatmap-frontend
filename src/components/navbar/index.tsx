@@ -10,10 +10,11 @@ import {
 import { _ROUTES } from "src/constants/appRoutes";
 import Auth from "src/components/navbar/auth";
 import { IsLoggedContext } from "src/helpers/isLoggedContext";
-import Home from "../home";
-import UserList from "src/components/userList";
+import Home from "src/components/home";
+import UserList from "src/components/manageUser";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import ManageSeatmap from "src/components/manageSeatmap";
 interface Tab {
   tabURL: string;
   tabTitle: string;
@@ -35,22 +36,16 @@ const tabs: Tab[] = [
     content: <Home />,
   },
   {
-    tabURL: _ROUTES.HOME_PAGE,
-    tabTitle: "Create seatmap",
-    role: "Admin",
-    content: <Home />,
-  },
-  {
     tabURL: _ROUTES.USER_LIST_PAGE,
     tabTitle: "User management",
     role: "admin",
     content: <UserList />,
   },
   {
-    tabURL: _ROUTES.USER_LIST_PAGE,
+    tabURL: _ROUTES.CREATE_SEATMAP_PAGE,
     tabTitle: "Seatmap management",
     role: "admin",
-    content: <UserList />,
+    content: <ManageSeatmap />,
   },
 ];
 

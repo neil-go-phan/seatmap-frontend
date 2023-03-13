@@ -10,7 +10,6 @@ export const Content = styled.div`
 flex-grow: 0;
 flex-shrink: 1;
 flex-basis: auto;
-  
 `;
 
 export const FooterWarpper = styled.div`
